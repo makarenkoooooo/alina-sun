@@ -4,411 +4,203 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Нажми на меня</title>
+
     <style>
       :root {
         --pink: #ff3dbb;
-        --hot: #ff2a2a;
+        --red: #ff2a2a;
         --purple: #7c3aed;
         --cyan: #22d3ee;
-        --bg1: #0b0016;
-        --bg2: #14003a;
-        --white: #fff;
+        --bg1: #120018;
+        --bg2: #2a0045;
+        --white: #ffffff;
       }
 
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
       body {
         margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", sans-serif;
-        color: var(--white);
-        overflow-x: hidden;
-        background:
-          radial-gradient(1200px 800px at 20% 10%, rgba(255, 61, 187, 0.35), transparent 60%),
-          radial-gradient(900px 700px at 80% 30%, rgba(34, 211, 238, 0.22), transparent 55%),
-          radial-gradient(900px 700px at 50% 95%, rgba(124, 58, 237, 0.22), transparent 55%),
-          linear-gradient(180deg, var(--bg1), var(--bg2));
-      }
-
-      /* animated background sparkles */
-      .sparkles {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.9;
-        filter: saturate(1.2);
-      }
-      .sparkles::before,
-      .sparkles::after {
-        content: "";
-        position: absolute;
-        inset: -80px;
-        background:
-          radial-gradient(circle at 10% 10%, rgba(255, 61, 187, 0.6), transparent 18%),
-          radial-gradient(circle at 30% 25%, rgba(34, 211, 238, 0.45), transparent 16%),
-          radial-gradient(circle at 70% 20%, rgba(255, 42, 42, 0.55), transparent 18%),
-          radial-gradient(circle at 85% 45%, rgba(124, 58, 237, 0.55), transparent 20%),
-          radial-gradient(circle at 20% 70%, rgba(255, 61, 187, 0.55), transparent 20%),
-          radial-gradient(circle at 65% 80%, rgba(34, 211, 238, 0.45), transparent 18%);
-        mix-blend-mode: screen;
-        animation: drift 10s linear infinite;
-      }
-      .sparkles::after {
-        opacity: 0.6;
-        filter: blur(1px);
-        animation-duration: 14s;
-        animation-direction: reverse;
-      }
-
-      @keyframes drift {
-        0% { transform: translate3d(-2%, -2%, 0) scale(1); }
-        50% { transform: translate3d(2%, 1%, 0) scale(1.03); }
-        100% { transform: translate3d(-2%, -2%, 0) scale(1); }
-      }
-
-      .wrap {
-        min-height: 100%;
         display: grid;
         place-items: center;
-        padding: 32px 16px;
-      }
-
-      .card {
-        width: min(860px, 100%);
-        border-radius: 28px;
-        padding: clamp(22px, 4vw, 42px);
-        background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
-        border: 1px solid rgba(255,255,255,0.14);
-        box-shadow:
-          0 20px 80px rgba(0,0,0,0.45),
-          0 0 0 1px rgba(255,255,255,0.06) inset;
-        position: relative;
+        font-family: Inter, system-ui, sans-serif;
+        background:
+          radial-gradient(900px 600px at 20% 10%, rgba(255, 61, 187, 0.35), transparent 60%),
+          radial-gradient(800px 600px at 80% 30%, rgba(34, 211, 238, 0.25), transparent 55%),
+          linear-gradient(180deg, var(--bg1), var(--bg2));
         overflow: hidden;
+        color: var(--white);
       }
 
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        background: rgba(255, 61, 187, 0.14);
-        border: 1px solid rgba(255, 61, 187, 0.25);
-        box-shadow: 0 0 40px rgba(255, 61, 187, 0.18);
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        font-size: 12px;
-        user-select: none;
-      }
-
-      .dot {
-        width: 10px; height: 10px;
-        border-radius: 50%;
-        background: radial-gradient(circle, #fff, rgba(255,255,255,0.2));
-        box-shadow:
-          0 0 18px rgba(255,255,255,0.5),
-          0 0 24px rgba(255, 61, 187, 0.45);
-      }
-
-      h1 {
-        margin: 18px 0 8px;
-        font-size: clamp(28px, 5vw, 56px);
-        line-height: 1.02;
-        letter-spacing: -0.02em;
-      }
-
-      .sub {
-        margin: 0 0 22px;
-        color: rgba(255,255,255,0.78);
-        font-size: clamp(14px, 2.2vw, 18px);
-        line-height: 1.5;
-        max-width: 60ch;
-      }
-
+      /* BUTTON */
       .btn {
-        --shadow: rgba(255, 61, 187, 0.55);
         appearance: none;
         border: none;
         cursor: pointer;
+        padding: 22px 34px;
         border-radius: 999px;
-        padding: 16px 22px;
+        font-size: clamp(18px, 4vw, 26px);
         font-weight: 900;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: #140014;
-        background: linear-gradient(90deg, var(--pink), #ff7a00, var(--cyan), var(--purple), var(--hot));
-        background-size: 240% 100%;
+        color: #2a001f;
+        background: linear-gradient(
+          90deg,
+          var(--pink),
+          var(--red),
+          var(--cyan),
+          var(--purple)
+        );
+        background-size: 300% 100%;
+        animation: gradientMove 3s ease infinite;
         box-shadow:
-          0 16px 40px rgba(0,0,0,0.35),
-          0 0 0 2px rgba(255,255,255,0.18) inset,
-          0 0 60px rgba(255, 61, 187, 0.25);
-        transition: transform 0.12s ease, filter 0.12s ease;
-        position: relative;
-        isolation: isolate;
-        animation: gradientMove 2.6s ease-in-out infinite;
+          0 20px 60px rgba(255, 61, 187, 0.45),
+          0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+        transition: transform 0.15s ease;
       }
-      .btn:focus-visible {
-        outline: 3px solid rgba(34, 211, 238, 0.9);
-        outline-offset: 4px;
+
+      .btn:hover {
+        transform: scale(1.05);
       }
-      .btn:hover { transform: translateY(-2px) scale(1.01); filter: brightness(1.05); }
-      .btn:active { transform: translateY(0px) scale(0.98); }
+
+      .btn:active {
+        transform: scale(0.95);
+      }
 
       @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
-      .btn .shine {
-        position: absolute;
-        inset: -2px;
-        border-radius: inherit;
-        background: radial-gradient(120px 70px at 20% 10%, rgba(255,255,255,0.75), transparent 60%);
-        mix-blend-mode: overlay;
-        opacity: 0.0;
-        transition: opacity 0.15s ease;
-        z-index: -1;
-      }
-      .btn:hover .shine { opacity: 0.75; }
-
-      .stage {
-        margin-top: 26px;
-        position: relative;
-        min-height: 240px;
-        border-radius: 22px;
-        background: rgba(0,0,0,0.22);
-        border: 1px solid rgba(255,255,255,0.10);
-        overflow: hidden;
-      }
-
-      .msg {
+      /* MESSAGE BLOCK (hidden initially) */
+      .message {
         position: absolute;
         inset: 0;
         display: grid;
         place-items: center;
-        padding: 22px;
         text-align: center;
         opacity: 0;
-        transform: translateY(12px) scale(0.98);
         pointer-events: none;
       }
 
-      .msg.is-on {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        animation: popIn 700ms cubic-bezier(.2,.9,.1,1) both;
+      .message.is-show {
+        animation: showMessage 0.9s cubic-bezier(0.2, 0.9, 0.1, 1) forwards;
       }
 
-      @keyframes popIn {
-        0% { opacity: 0; transform: translateY(16px) scale(0.94); filter: blur(6px); }
-        60% { opacity: 1; transform: translateY(-4px) scale(1.02); filter: blur(0); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
+      @keyframes showMessage {
+        0% {
+          opacity: 0;
+          transform: scale(0.85);
+          filter: blur(10px);
+        }
+        60% {
+          opacity: 1;
+          transform: scale(1.05);
+          filter: blur(0);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
 
-      .big {
-        font-size: clamp(28px, 6vw, 70px);
+      .text {
+        font-size: clamp(28px, 7vw, 80px);
         font-weight: 1000;
-        line-height: 1.02;
-        letter-spacing: -0.03em;
         text-transform: uppercase;
-        padding: 18px 18px 10px;
-        border-radius: 22px;
-        background:
-          radial-gradient(700px 220px at 50% 0%, rgba(255, 61, 187, 0.35), transparent 55%),
-          radial-gradient(600px 220px at 50% 100%, rgba(34, 211, 238, 0.25), transparent 55%);
+        letter-spacing: -0.03em;
       }
 
-      .big .name {
-        display: inline-block;
-        background: linear-gradient(90deg, var(--pink), #ff7a00, var(--hot));
-        -webkit-background-clip: text;
+      .name {
+        background: linear-gradient(90deg, var(--pink), var(--red));
         background-clip: text;
+        -webkit-background-clip: text;
         color: transparent;
-        text-shadow: 0 10px 28px rgba(255, 61, 187, 0.25);
-        animation: namePulse 900ms ease-in-out infinite;
+        animation: pulse 1s ease-in-out infinite;
       }
 
-      @keyframes namePulse {
-        0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
-        50% { transform: translateY(-2px) rotate(1deg) scale(1.02); }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.06);
+        }
       }
 
-      .hearts {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-      }
-
+      /* HEARTS */
       .heart {
         position: absolute;
-        left: var(--x);
         bottom: -40px;
-        font-size: var(--s);
-        filter: drop-shadow(0 10px 18px rgba(255, 61, 187, 0.35));
-        animation: floatUp var(--d) linear forwards;
-        transform: translateY(0) scale(1);
-        opacity: 0.0;
+        font-size: 28px;
+        animation: floatUp 2s ease forwards;
+        pointer-events: none;
       }
 
       @keyframes floatUp {
-        0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0.9); opacity: 0; }
-        10% { opacity: 1; }
-        100% { transform: translateY(-320px) translateX(var(--dx)) rotate(18deg) scale(1.1); opacity: 0; }
-      }
-
-      .confetti {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      .piece {
-        position: absolute;
-        top: -20px;
-        left: var(--x);
-        width: 10px;
-        height: 18px;
-        border-radius: 3px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.15));
-        box-shadow: 0 0 22px rgba(255, 61, 187, 0.22);
-        transform: rotate(var(--r));
-        opacity: 0;
-        animation: confFall var(--t) ease-in forwards;
-      }
-
-      @keyframes confFall {
-        0% { transform: translateY(0) rotate(var(--r)); opacity: 0; }
-        10% { opacity: 1; }
-        100% { transform: translateY(320px) rotate(calc(var(--r) + 200deg)); opacity: 0; }
-      }
-
-      .hint {
-        margin-top: 14px;
-        color: rgba(255,255,255,0.65);
-        font-size: 13px;
-      }
-
-      .cornerGlow {
-        position: absolute;
-        width: 520px;
-        height: 520px;
-        border-radius: 50%;
-        backgroundfilter: blur(0);
-        background: radial-gradient(circle, rgba(255, 61, 187, 0.35), transparent 60%);
-        top: -240px;
-        right: -240px;
-        filter: blur(2px);
-        opacity: 0.9;
-        pointer-events: none;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .sparkles::before, .sparkles::after,
-        .btn, .big .name, .heart, .piece, .msg.is-on {
-          animation: none !important;
-          transition: none !important;
+        0% {
+          transform: translateY(0) scale(0.8);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-320px) scale(1.2);
+          opacity: 0;
         }
       }
     </style>
   </head>
+
   <body>
-    <div class="sparkles" aria-hidden="true"></div>
+    <!-- ONLY BUTTON AT START -->
+    <button class="btn" id="btn">нажми на меня</button>
 
-    <main class="wrap">
-      <section class="card" aria-label="Открытка">
-        <div class="cornerGlow" aria-hidden="true"></div>
-
-        <div class="badge"><span class="dot"></span> интерактивная открытка</div>
-        <h1>Кнопка с сюрпризом</h1>
-        <p class="sub">
-          Нажми кнопку — и появится сообщение с яркими эффектами в розово-красной стилистике.
-        </p>
-
-        <button class="btn" id="btn" type="button" aria-label="Нажми на меня">
-          нажми на меня
-          <span class="shine" aria-hidden="true"></span>
-        </button>
-
-        <div class="hint">Подсказка: нажимай несколько раз — эффекты обновляются.</div>
-
-        <div class="stage" aria-live="polite" aria-atomic="true">
-          <div class="msg" id="msg">
-            <div class="big">
-              <span class="name">Алина</span>, я тебя люблю
-            </div>
-          </div>
-
-          <div class="hearts" id="hearts" aria-hidden="true"></div>
-          <div class="confetti" id="confetti" aria-hidden="true"></div>
-        </div>
-      </section>
-    </main>
+    <!-- MESSAGE (hidden initially) -->
+    <div class="message" id="message">
+      <div class="text">
+        <span class="name">Алина</span>,<br />
+        я тебя люблю ❤️
+      </div>
+    </div>
 
     <script>
       const btn = document.getElementById('btn');
-      const msg = document.getElementById('msg');
-      const hearts = document.getElementById('hearts');
-      const confetti = document.getElementById('confetti');
+      const message = document.getElementById('message');
 
-      function rand(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      function clearEffects() {
-        hearts.innerHTML = '';
-        confetti.innerHTML = '';
-      }
-
-      function spawnHearts(count = 18) {
-        const icons = ['❤', '💖', '💗', '💘', '💕'];
+      function spawnHearts(count = 16) {
+        const icons = ['❤️', '💖', '💗', '💕'];
         for (let i = 0; i < count; i++) {
-          const el = document.createElement('div');
-          el.className = 'heart';
-          el.textContent = icons[Math.floor(rand(0, icons.length))];
-          el.style.setProperty('--x', `${rand(6, 94)}%`);
-          el.style.setProperty('--dx', `${rand(-40, 40)}px`);
-          el.style.setProperty('--s', `${rand(18, 34)}px`);
-          el.style.setProperty('--d', `${rand(1.2, 2.1)}s`);
-          hearts.appendChild(el);
-          // cleanup
-          el.addEventListener('animationend', () => el.remove());
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.textContent = icons[Math.floor(Math.random() * icons.length)];
+          heart.style.left = Math.random() * 100 + '%';
+          heart.style.fontSize = 18 + Math.random() * 22 + 'px';
+          document.body.appendChild(heart);
+          heart.addEventListener('animationend', () => heart.remove());
         }
-      }
-
-      function spawnConfetti(count = 26) {
-        for (let i = 0; i < count; i++) {
-          const p = document.createElement('div');
-          p.className = 'piece';
-          p.style.setProperty('--x', `${rand(0, 100)}%`);
-          p.style.setProperty('--r', `${rand(-60, 60)}deg`);
-          p.style.setProperty('--t', `${rand(0.9, 1.7)}s`);
-          // slight hue via opacity + extra glow randomness (no explicit colors required)
-          p.style.opacity = '0';
-          confetti.appendChild(p);
-          p.addEventListener('animationend', () => p.remove());
-        }
-      }
-
-      function flashMessage() {
-        // restart animation
-        msg.classList.remove('is-on');
-        void msg.offsetWidth; // reflow
-        msg.classList.add('is-on');
       }
 
       btn.addEventListener('click', () => {
-        clearEffects();
-        flashMessage();
+        btn.style.display = 'none'; // remove button
+        message.classList.add('is-show'); // show message
         spawnHearts(20);
-        spawnConfetti(30);
       });
-
-      // initial subtle intro
-      setTimeout(() => {
-        flashMessage();
-        spawnHearts(10);
-      }, 350);
     </script>
   </body>
 </html>
