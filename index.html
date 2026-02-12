@@ -489,9 +489,9 @@
       </section>
     </main>
 
- <script>
+<script>
   /* ======================
-     BACKGROUND HEARTS
+     BACKGROUND HEARTS (CSS)
   ====================== */
   const bgHearts = document.getElementById('bgHearts')
   const BG_COUNT = 16
@@ -539,7 +539,7 @@
   }
 
   /* ======================
-     CANVAS HEART FX (OPTIMIZED)
+     CANVAS HEART FX (SAFE)
   ====================== */
   const canvas = document.getElementById('fx')
   const ctx = canvas.getContext('2d')
@@ -610,24 +610,45 @@
     }
   }
 
+  function playLoveFX() {
+    if (fxPlayed) return
+    fxPlayed = true
+    spawnHearts()
+    animate()
+  }
+
   /* ======================
-     UI LOGIC
+     UI ACTIONS
   ====================== */
   const btn = document.getElementById('btn')
+  const btnAgain = document.getElementById('btnAgain')
 
-  btn.addEventListener('click', () => {
+  function revealText() {
     if (!poemBox.classList.contains('is-show')) {
       poemBox.classList.add('is-show')
       typeText(POEM)
+    }
+  }
 
-      if (!fxPlayed) {
-        fxPlayed = true
-        spawnHearts()
-        animate()
-      }
+  btn.addEventListener('click', () => {
+    revealText()
+    playLoveFX()
+  })
+
+  btnAgain.addEventListener('click', () => {
+    revealText()
+    playLoveFX()
+  })
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      revealText()
+      playLoveFX()
     }
   })
 </script>
+
 
   </body>
 </html>
