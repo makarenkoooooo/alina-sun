@@ -489,165 +489,168 @@
       </section>
     </main>
 
-<script>
-  /* ======================
-     BACKGROUND HEARTS (CSS)
-  ====================== */
-  const bgHearts = document.getElementById('bgHearts')
-  const BG_COUNT = 16
+    <script>
+      /* ======================
+           BACKGROUND HEARTS (CSS)
+        ====================== */
+      const bgHearts = document.getElementById('bgHearts')
+      const BG_COUNT = 16
 
-  function makeBgHearts() {
-    bgHearts.innerHTML = ''
-    for (let i = 0; i < BG_COUNT; i++) {
-      const s = document.createElement('span')
-      const size = Math.random() * 14 + 10
-      const x = Math.random() * 100
-      const d = Math.random() * 6 + 8
-      s.style.setProperty('--s', `${size}px`)
-      s.style.setProperty('--x', `${x}vw`)
-      s.style.setProperty('--d', `${d}s`)
-      s.style.opacity = 0.35
-      bgHearts.appendChild(s)
-    }
-  }
-  makeBgHearts()
+      function makeBgHearts() {
+        bgHearts.innerHTML = ''
+        for (let i = 0; i < BG_COUNT; i++) {
+          const s = document.createElement('span')
+          const size = Math.random() * 14 + 10
+          const x = Math.random() * 100
+          const d = Math.random() * 6 + 8
+          s.style.setProperty('--s', `${size}px`)
+          s.style.setProperty('--x', `${x}vw`)
+          s.style.setProperty('--d', `${d}s`)
+          s.style.opacity = 0.35
+          bgHearts.appendChild(s)
+        }
+      }
+      makeBgHearts()
 
-  /* ======================
-     TYPEWRITER
-  ====================== */
-  const typeEl = document.getElementById('type')
-  const poemBox = document.getElementById('poem')
+      /* ======================
+           TYPEWRITER
+        ====================== */
+      const typeEl = document.getElementById('type')
+      const poemBox = document.getElementById('poem')
 
-  const POEM = `Алина, ты — мой тихий свет и громкая весна,
-ты — нежность в каждом «можно?», и смелость в каждом «да».
+      const POEM = `Алина, ты — мой тихий свет и громкая весна,
+      ты — нежность в каждом «можно?», и смелость в каждом «да».
+      
+      Пусть мир бывает сложным — я рядом, не уйду.
+      Я выбираю нас. Всегда. Сегодня. И везде — в любом году.
+      
+      Если у любви есть имя —
+      оно звучит, как ты: Алина.
+      ❤`
 
-Пусть мир бывает сложным — я рядом, не уйду.
-Я выбираю нас. Всегда. Сегодня. И везде — в любом году.
+      function typeText(text, speed = 18) {
+        let i = 0
+        typeEl.textContent = ''
+        const timer = setInterval(() => {
+          typeEl.textContent += text[i] || ''
+          i++
+          if (i > text.length) clearInterval(timer)
+        }, speed)
+      }
 
-Если у любви есть имя —
-оно звучит, как ты: Алина.
-❤`
+      /* ======================
+           CANVAS HEART FX
+        ====================== */
+      const canvas = document.getElementById('fx')
+      const ctx = canvas.getContext('2d')
+      let raf = null
+      let fxRunning = false
 
-  function typeText(text, speed = 18) {
-    let i = 0
-    typeEl.textContent = ''
-    const timer = setInterval(() => {
-      typeEl.textContent += text[i] || ''
-      i++
-      if (i > text.length) clearInterval(timer)
-    }, speed)
-  }
+      function resize() {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+      }
+      resize()
+      window.addEventListener('resize', resize)
 
-  /* ======================
-     CANVAS HEART FX (SAFE)
-  ====================== */
-  const canvas = document.getElementById('fx')
-  const ctx = canvas.getContext('2d')
-  let fxPlayed = false
-  let raf = null
+      const particles = []
 
-  function resize() {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-  }
-  resize()
-  window.addEventListener('resize', resize)
+      function heart(x, y, s, r) {
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.rotate(r)
+        ctx.beginPath()
+        ctx.moveTo(0, -0.3 * s)
+        ctx.bezierCurveTo(0.6 * s, -0.9 * s, 1.4 * s, -0.1 * s, 0, s)
+        ctx.bezierCurveTo(-1.4 * s, -0.1 * s, -0.6 * s, -0.9 * s, 0, -0.3 * s)
+        ctx.closePath()
+        ctx.restore()
+      }
 
-  const particles = []
+      function spawnHearts() {
+        const cx = window.innerWidth / 2
+        const cy = window.innerHeight / 2
 
-  function heart(x, y, s, r) {
-    ctx.save()
-    ctx.translate(x, y)
-    ctx.rotate(r)
-    ctx.beginPath()
-    ctx.moveTo(0, -0.3 * s)
-    ctx.bezierCurveTo(0.6 * s, -0.9 * s, 1.4 * s, -0.1 * s, 0, s)
-    ctx.bezierCurveTo(-1.4 * s, -0.1 * s, -0.6 * s, -0.9 * s, 0, -0.3 * s)
-    ctx.closePath()
-    ctx.restore()
-  }
+        for (let i = 0; i < 60; i++) {
+          particles.push({
+            x: cx,
+            y: cy,
+            vx: (Math.random() - 0.5) * 3,
+            vy: -Math.random() * 4 - 1,
+            g: 0.08,
+            s: Math.random() * 8 + 6,
+            r: Math.random() * Math.PI,
+            life: 80,
+          })
+        }
+      }
 
-  function spawnHearts() {
-    const cx = window.innerWidth / 2
-    const cy = window.innerHeight / 2
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: cx,
-        y: cy,
-        vx: (Math.random() - 0.5) * 3,
-        vy: -Math.random() * 4 - 1,
-        g: 0.08,
-        s: Math.random() * 8 + 6,
-        r: Math.random() * Math.PI,
-        life: 80,
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i]
+          p.vy += p.g
+          p.x += p.vx
+          p.y += p.vy
+          p.life--
+
+          ctx.fillStyle = 'rgba(255, 62, 165, 0.75)'
+          heart(p.x, p.y, p.s, p.r)
+          ctx.fill()
+
+          if (p.life <= 0) particles.splice(i, 1)
+        }
+
+        if (particles.length > 0) {
+          raf = requestAnimationFrame(animate)
+        } else {
+          fxRunning = false
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          cancelAnimationFrame(raf)
+        }
+      }
+
+      function playLoveFX() {
+        if (fxRunning) return
+        fxRunning = true
+        spawnHearts()
+        animate()
+      }
+
+      /* ======================
+           UI ACTIONS
+        ====================== */
+      const btn = document.getElementById('btn')
+      const btnAgain = document.getElementById('btnAgain')
+
+      function revealText() {
+        if (!poemBox.classList.contains('is-show')) {
+          poemBox.classList.add('is-show')
+          typeText(POEM)
+
+          // 🔓 АКТИВИРУЕМ ВТОРУЮ КНОПКУ
+          btnAgain.disabled = false
+        }
+      }
+
+      btn.addEventListener('click', () => {
+        revealText()
+        playLoveFX()
       })
-    }
-  }
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+      btnAgain.addEventListener('click', () => {
+        playLoveFX()
+      })
 
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i]
-      p.vy += p.g
-      p.x += p.vx
-      p.y += p.vy
-      p.life--
-
-      ctx.fillStyle = 'rgba(255, 62, 165, 0.75)'
-      heart(p.x, p.y, p.s, p.r)
-      ctx.fill()
-
-      if (p.life <= 0) particles.splice(i, 1)
-    }
-
-    if (particles.length > 0) {
-      raf = requestAnimationFrame(animate)
-    } else {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      cancelAnimationFrame(raf)
-    }
-  }
-
-  function playLoveFX() {
-    if (fxPlayed) return
-    fxPlayed = true
-    spawnHearts()
-    animate()
-  }
-
-  /* ======================
-     UI ACTIONS
-  ====================== */
-  const btn = document.getElementById('btn')
-  const btnAgain = document.getElementById('btnAgain')
-
-  function revealText() {
-    if (!poemBox.classList.contains('is-show')) {
-      poemBox.classList.add('is-show')
-      typeText(POEM)
-    }
-  }
-
-  btn.addEventListener('click', () => {
-    revealText()
-    playLoveFX()
-  })
-
-  btnAgain.addEventListener('click', () => {
-    revealText()
-    playLoveFX()
-  })
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      revealText()
-      playLoveFX()
-    }
-  })
-</script>
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          revealText()
+          playLoveFX()
+        }
+      })
+    </script>
 
 
   </body>
