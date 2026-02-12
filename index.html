@@ -4,167 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Алина, я тебя люблю</title>
+
     <style>
       :root {
         --bg1: #070a1a;
         --bg2: #160a2a;
         --pink: #ff3ea5;
-        --hot: #ff1f6a;
         --blue: #29b6ff;
         --violet: #8b5cff;
-        --white: rgba(255, 255, 255, 0.92);
-        --glass: rgba(255, 255, 255, 0.08);
-        --glass2: rgba(255, 255, 255, 0.12);
-        --stroke: rgba(255, 255, 255, 0.18);
-        --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        --white: rgba(255, 255, 255, 0.95);
       }
 
       * {
         box-sizing: border-box;
       }
+
       html,
       body {
         height: 100%;
       }
+
       body {
         margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-          Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
         color: var(--white);
         overflow: hidden;
         background: radial-gradient(
             1200px 800px at 20% 10%,
-            rgba(41, 182, 255, 0.24),
+            rgba(41, 182, 255, 0.25),
             transparent 55%
           ),
           radial-gradient(
-            900px 700px at 85% 20%,
-            rgba(255, 62, 165, 0.22),
-            transparent 55%
-          ),
-          radial-gradient(
-            900px 700px at 50% 95%,
-            rgba(139, 92, 255, 0.16),
+            900px 700px at 80% 20%,
+            rgba(255, 62, 165, 0.25),
             transparent 55%
           ),
           linear-gradient(135deg, var(--bg1), var(--bg2));
       }
 
-      /* subtle animated noise + glow */
-      .noise {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.08;
-        mix-blend-mode: overlay;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-        animation: drift 8s linear infinite;
-      }
-      @keyframes drift {
-        0% {
-          transform: translate3d(0, 0, 0);
-        }
-        100% {
-          transform: translate3d(-4%, 3%, 0);
-        }
-      }
-
       .wrap {
-        position: relative;
         height: 100%;
         display: grid;
         place-items: center;
-        padding: 24px;
+        padding: 20px;
       }
 
       .card {
-        width: min(920px, 92vw);
-        border-radius: 28px;
-        border: 1px solid var(--stroke);
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.10),
-          rgba(255, 255, 255, 0.06)
-        );
-        box-shadow: var(--shadow);
+        max-width: 900px;
+        width: 100%;
+        border-radius: 26px;
+        padding: 36px 28px 30px;
+        background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        overflow: hidden;
-        position: relative;
-      }
-
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        background: radial-gradient(
-            900px 300px at 15% 0%,
-            rgba(41, 182, 255, 0.22),
-            transparent 55%
-          ),
-          radial-gradient(
-            700px 280px at 80% 10%,
-            rgba(255, 62, 165, 0.20),
-            transparent 55%
-          ),
-          radial-gradient(
-            700px 400px at 50% 100%,
-            rgba(139, 92, 255, 0.14),
-            transparent 60%
-          );
-        filter: blur(18px);
-        opacity: 0.9;
-        pointer-events: none;
-      }
-
-      .inner {
-        position: relative;
-        padding: 34px 28px 26px;
-      }
-
-      .topline {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 18px;
-      }
-
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        background: rgba(0, 0, 0, 0.16);
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        font-size: 12px;
-      }
-
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, var(--blue), var(--pink));
-        box-shadow: 0 0 22px rgba(255, 62, 165, 0.35);
-      }
-
-      .hint {
-        font-size: 13px;
-        opacity: 0.75;
-        line-height: 1.35;
-        text-align: right;
-        max-width: 280px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.18);
       }
 
       h1 {
-        margin: 0 0 12px;
-        font-size: clamp(30px, 5vw, 56px);
-        line-height: 1.02;
-        letter-spacing: -0.02em;
+        margin: 0 0 16px;
+        font-size: clamp(32px, 5vw, 56px);
+        line-height: 1.05;
       }
 
       .grad {
@@ -172,530 +71,215 @@
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        filter: drop-shadow(0 12px 30px rgba(255, 62, 165, 0.18));
       }
 
       .sub {
-        margin: 0 0 22px;
-        font-size: clamp(14px, 2.1vw, 18px);
-        line-height: 1.5;
-        opacity: 0.88;
-        max-width: 66ch;
-      }
-
-      .controls {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 12px;
-        margin-top: 14px;
+        font-size: clamp(14px, 2.2vw, 18px);
+        opacity: 0.9;
+        line-height: 1.55;
+        max-width: 65ch;
+        margin-bottom: 22px;
       }
 
       .btn {
-        border: 0;
         cursor: pointer;
-        position: relative;
-        padding: 14px 18px;
+        border: none;
         border-radius: 16px;
+        padding: 14px 22px;
+        font-size: 16px;
         font-weight: 800;
-        font-size: 15px;
-        letter-spacing: 0.02em;
-        color: rgba(255, 255, 255, 0.96);
+        color: #fff;
         background: linear-gradient(135deg, var(--pink), var(--violet));
-        box-shadow: 0 18px 40px rgba(255, 31, 106, 0.22);
-        transform: translateZ(0);
+        box-shadow: 0 18px 40px rgba(255, 62, 165, 0.25);
         transition: transform 0.2s ease, filter 0.2s ease;
-        outline: none;
       }
+
       .btn:hover {
-        transform: translateY(-2px) scale(1.01);
+        transform: translateY(-2px);
         filter: brightness(1.05);
       }
+
       .btn:active {
-        transform: translateY(0px) scale(0.99);
-      }
-
-      .btn::after {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: 18px;
-        background: linear-gradient(90deg, rgba(41, 182, 255, 0.45), rgba(255, 62, 165, 0.5), rgba(139, 92, 255, 0.45));
-        filter: blur(14px);
-        opacity: 0.55;
-        z-index: -1;
-      }
-
-      .btn.secondary {
-        background: rgba(255, 255, 255, 0.10);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        box-shadow: none;
-        font-weight: 700;
+        transform: translateY(0);
       }
 
       .poem {
-        margin-top: 18px;
-        padding: 18px 16px;
+        margin-top: 24px;
+        padding: 20px;
         border-radius: 18px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        background: rgba(0, 0, 0, 0.16);
-        overflow: hidden;
-        position: relative;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         display: none;
       }
+
       .poem.is-show {
         display: block;
-        animation: pop 0.7s cubic-bezier(0.2, 0.9, 0.2, 1) both;
-      }
-      @keyframes pop {
-        0% {
-          transform: translateY(12px) scale(0.98);
-          opacity: 0;
-        }
-        100% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
+        animation: fadeUp 0.7s ease both;
       }
 
-      .poem::before {
-        content: "";
-        position: absolute;
-        inset: -60px -80px auto auto;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, rgba(255, 62, 165, 0.25), transparent 60%);
-        filter: blur(10px);
-        pointer-events: none;
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .type {
         font-size: clamp(16px, 2.4vw, 20px);
         line-height: 1.55;
-        margin: 0;
         white-space: pre-wrap;
       }
 
       .sig {
         margin-top: 14px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        opacity: 0.85;
-        font-weight: 700;
-      }
-
-      .sig span {
-        font-weight: 900;
-        background: linear-gradient(90deg, var(--blue), var(--pink));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      .footerline {
-        margin-top: 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        opacity: 0.7;
-        font-size: 12px;
-      }
-
-      .kbd {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .key {
-        padding: 4px 8px;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        background: rgba(0, 0, 0, 0.18);
         font-weight: 800;
-        letter-spacing: 0.02em;
+        opacity: 0.85;
       }
 
-      /* floating background hearts (CSS) */
-      .bg-hearts {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-        z-index: 0;
-        opacity: 0.35;
-      }
-      .bg-hearts span {
-        position: absolute;
-        left: var(--x);
-        bottom: -14vh;
-        width: var(--s);
-        height: var(--s);
-        transform: rotate(45deg);
-        animation: floatUp var(--d) linear infinite;
-        filter: drop-shadow(0 10px 18px rgba(255, 62, 165, 0.22));
-      }
-      .bg-hearts span::before,
-      .bg-hearts span::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(255, 62, 165, 0.9), rgba(41, 182, 255, 0.75));
-        border-radius: 18%;
-      }
-      .bg-hearts span::before {
-        transform: translateX(-50%);
-        border-radius: 50%;
-      }
-      .bg-hearts span::after {
-        transform: translateY(-50%);
-        border-radius: 50%;
-      }
-
-      @keyframes floatUp {
-        0% {
-          transform: translateY(0) rotate(45deg) scale(0.95);
-          opacity: 0;
-        }
-        10% {
-          opacity: 0.9;
-        }
-        100% {
-          transform: translateY(-120vh) rotate(45deg) scale(1.1);
-          opacity: 0;
-        }
-      }
-
-      /* confetti hearts canvas */
       canvas {
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 3;
-      }
-
-      /* shine sweep */
-      .shine {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-      }
-      .shine::before {
-        content: "";
-        position: absolute;
-        inset: -60% -40%;
-        transform: rotate(18deg) translateX(-120%);
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.12),
-          transparent
-        );
-        animation: sweep 4.6s ease-in-out infinite;
-      }
-      @keyframes sweep {
-        0% {
-          transform: rotate(18deg) translateX(-120%);
-          opacity: 0;
-        }
-        15% {
-          opacity: 1;
-        }
-        45% {
-          transform: rotate(18deg) translateX(120%);
-          opacity: 0;
-        }
-        100% {
-          transform: rotate(18deg) translateX(120%);
-          opacity: 0;
-        }
-      }
-
-      /* mobile tweaks */
-      @media (max-width: 520px) {
-        .hint {
-          display: none;
-        }
-        .inner {
-          padding: 26px 18px 18px;
-        }
-        .btn {
-          width: 100%;
-          justify-content: center;
-        }
-        .controls {
-          gap: 10px;
-        }
-        .footerline {
-          flex-direction: column;
-          align-items: flex-start;
-        }
       }
     </style>
   </head>
+
   <body>
-    <div class="bg-hearts" aria-hidden="true" id="bgHearts"></div>
-    <div class="noise" aria-hidden="true"></div>
     <canvas id="fx" aria-hidden="true"></canvas>
 
     <main class="wrap">
-      <section class="card" role="region" aria-label="Признание в любви">
-        <div class="shine" aria-hidden="true"></div>
+      <section class="card">
+        <h1>
+          Алина, <span class="grad">я тебя люблю</span>
+        </h1>
 
-        <div class="inner">
-          <div class="topline">
-            <div class="badge"><i class="dot"></i> секретное сообщение</div>
-            <div class="hint">
-              Нажми кнопку — и начнётся дождь из сердечек.
-              <br />
-              Секретные клавиши: <span class="kbd"><span class="key">Space</span> / <span class="key">Enter</span></span>
-            </div>
-          </div>
+        <p class="sub">
+          Нажми кнопку — и я скажу тебе самое главное.  
+          Только один раз. Как настоящее признание.
+        </p>
 
-          <h1>
-            Алина, <span class="grad">я тебя люблю</span>
-          </h1>
-          <p class="sub">
-            Это маленькая открытка-магия: одно нажатие — и мир становится
-            розово-голубым, как будто сама Вселенная шепчет тебе тёплые слова.
-          </p>
+        <button class="btn" id="btn">Нажми меня 💗</button>
 
-          <div class="controls">
-            <button class="btn" id="btn">
-              Нажми меня 💗
-            </button>
-            <button class="btn secondary" id="btnAgain" disabled>
-              Ещё сердечки
-            </button>
-          </div>
-
-          <div class="poem" id="poem" aria-live="polite">
-            <p class="type" id="type"></p>
-            <div class="sig">— <span>Сергей</span></div>
-          </div>
-
-          <div class="footerline">
-            <div>Подсказка: повторное нажатие добавит ещё больше сердечек.</div>
-            <div class="kbd">
-              <span class="key">Esc</span> — остановить фейерверк
-            </div>
-          </div>
+        <div class="poem" id="poem">
+          <p class="type" id="type"></p>
+          <div class="sig">— Сергей</div>
         </div>
       </section>
     </main>
 
     <script>
-      // ===== Background hearts (CSS elements) =====
-      const bgHearts = document.getElementById('bgHearts');
-      const BG_COUNT = 22;
+      /* ======================
+         TYPEWRITER
+      ====================== */
+      const typeEl = document.getElementById('type')
+      const poemBox = document.getElementById('poem')
 
-      function makeBgHearts() {
-        bgHearts.innerHTML = '';
-        for (let i = 0; i < BG_COUNT; i++) {
-          const s = document.createElement('span');
-          const size = Math.random() * 18 + 10; // 10..28
-          const x = Math.random() * 100; // vw
-          const d = Math.random() * 6 + 6; // 6..12 sec
-          s.style.setProperty('--s', `${size}px`);
-          s.style.setProperty('--x', `${x}vw`);
-          s.style.setProperty('--d', `${d}s`);
-          s.style.animationDelay = `${Math.random() * 4}s`;
-          s.style.opacity = (Math.random() * 0.5 + 0.35).toFixed(2);
-          bgHearts.appendChild(s);
-        }
-      }
-      makeBgHearts();
-      window.addEventListener('resize', () => makeBgHearts(), { passive: true });
-
-      // ===== Typewriter =====
-      const typeEl = document.getElementById('type');
-      const poemBox = document.getElementById('poem');
-
-      const POEM =
-`Алина, ты — мой тихий свет и громкая весна,
-ты — нежность в каждом «можно?», и смелость в каждом «да».
+      const POEM = `Алина, ты — мой тихий свет и громкая весна,
+ты — нежность в каждом «можно?» и смелость в каждом «да».
 
 Пусть мир бывает сложным — я рядом, не уйду.
-Я выбираю нас. Всегда. Сегодня. И везде — в любом году.
+Я выбираю нас. Всегда. Сегодня. И в любом году.
 
 Если у любви есть имя —
-оно звучит, как ты: Алина.
-❤`;
-
-      let typing = false;
-      let typeTimer = null;
+оно звучит, как ты. ❤️`
 
       function typeText(text, speed = 18) {
-        clearInterval(typeTimer);
-        typeEl.textContent = '';
-        typing = true;
-        let i = 0;
-        typeTimer = setInterval(() => {
-          typeEl.textContent += text[i] || '';
-          i++;
-          if (i > text.length) {
-            clearInterval(typeTimer);
-            typing = false;
-          }
-        }, speed);
+        let i = 0
+        typeEl.textContent = ''
+        const timer = setInterval(() => {
+          typeEl.textContent += text[i] || ''
+          i++
+          if (i > text.length) clearInterval(timer)
+        }, speed)
       }
 
-      // ===== Canvas heart particles =====
-      const canvas = document.getElementById('fx');
-      const ctx = canvas.getContext('2d', { alpha: true });
+      /* ======================
+         CANVAS HEART FX (ONCE)
+      ====================== */
+      const canvas = document.getElementById('fx')
+      const ctx = canvas.getContext('2d')
+      let fxPlayedOnce = false
 
-      function resizeCanvas() {
-        const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-        canvas.width = Math.floor(window.innerWidth * dpr);
-        canvas.height = Math.floor(window.innerHeight * dpr);
-        canvas.style.width = window.innerWidth + 'px';
-        canvas.style.height = window.innerHeight + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      function resize() {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
       }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas, { passive: true });
+      resize()
+      window.addEventListener('resize', resize)
 
-      const particles = [];
-      let running = false;
-      let raf = null;
+      const particles = []
 
-      function rand(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      function heartPath(x, y, size, rot) {
-        // Draw a heart via parametric-like curve using bezier path
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.beginPath();
-        const s = size;
-        ctx.moveTo(0, -0.25 * s);
-        ctx.bezierCurveTo(0.55 * s, -0.9 * s, 1.35 * s, -0.05 * s, 0, 0.9 * s);
-        ctx.bezierCurveTo(-1.35 * s, -0.05 * s, -0.55 * s, -0.9 * s, 0, -0.25 * s);
-        ctx.closePath();
-        ctx.restore();
+      function heart(x, y, s, r) {
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.rotate(r)
+        ctx.beginPath()
+        ctx.moveTo(0, -0.3 * s)
+        ctx.bezierCurveTo(0.6 * s, -0.9 * s, 1.4 * s, -0.1 * s, 0, s)
+        ctx.bezierCurveTo(-1.4 * s, -0.1 * s, -0.6 * s, -0.9 * s, 0, -0.3 * s)
+        ctx.closePath()
+        ctx.restore()
       }
 
-      function spawnBurst(count = 120) {
-        const cx = window.innerWidth * 0.5;
-        const cy = window.innerHeight * 0.55;
+      function spawnHearts() {
+        const cx = window.innerWidth / 2
+        const cy = window.innerHeight / 2
 
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < 120; i++) {
           particles.push({
-            x: cx + rand(-18, 18),
-            y: cy + rand(-10, 10),
-            vx: rand(-4.2, 4.2),
-            vy: rand(-7.4, -2.6),
-            g: rand(0.08, 0.16),
-            size: rand(6, 14),
-            rot: rand(0, Math.PI * 2),
-            vr: rand(-0.08, 0.08),
-            life: rand(70, 120),
-            t: 0,
-            a: 1,
-            hue: rand(305, 330), // pink-ish
-            hue2: rand(190, 205), // blue-ish
-            mix: Math.random()
-          });
+            x: cx,
+            y: cy,
+            vx: (Math.random() - 0.5) * 6,
+            vy: -Math.random() * 6 - 2,
+            g: 0.12,
+            s: Math.random() * 10 + 6,
+            r: Math.random() * Math.PI,
+            life: 100,
+          })
         }
       }
 
-      function loop() {
-        raf = requestAnimationFrame(loop);
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
         for (let i = particles.length - 1; i >= 0; i--) {
-          const p = particles[i];
-          p.t++;
-          p.vy += p.g;
-          p.x += p.vx;
-          p.y += p.vy;
-          p.rot += p.vr;
-          p.a = Math.max(0, 1 - p.t / p.life);
+          const p = particles[i]
+          p.vy += p.g
+          p.x += p.vx
+          p.y += p.vy
+          p.life--
 
-          // gradient fill per heart
-          const grad = ctx.createLinearGradient(p.x - 10, p.y - 10, p.x + 10, p.y + 10);
-          grad.addColorStop(0, `hsla(${p.hue}, 95%, 65%, ${0.9 * p.a})`);
-          grad.addColorStop(1, `hsla(${p.hue2}, 95%, 62%, ${0.75 * p.a})`);
+          ctx.fillStyle = 'rgba(255, 62, 165, 0.8)'
+          heart(p.x, p.y, p.s, p.r)
+          ctx.fill()
 
-          ctx.fillStyle = grad;
-          ctx.shadowBlur = 18;
-          ctx.shadowColor = `rgba(255, 62, 165, ${0.25 * p.a})`;
-
-          heartPath(p.x, p.y, p.size, p.rot);
-          ctx.fill();
-
-          if (p.t >= p.life || p.y > window.innerHeight + 80) {
-            particles.splice(i, 1);
-          }
+          if (p.life <= 0) particles.splice(i, 1)
         }
 
-        if (particles.length === 0 && running) {
-          running = false;
-          cancelAnimationFrame(raf);
-          raf = null;
-        }
+        if (particles.length) requestAnimationFrame(animate)
       }
 
-      function startFX(extra = 0) {
-        spawnBurst(140 + extra);
-        if (!running) {
-          running = true;
-          loop();
-        }
-      }
-
-      function stopFX() {
-        particles.length = 0;
-        if (raf) cancelAnimationFrame(raf);
-        raf = null;
-        running = false;
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      }
-
-      // ===== UI actions =====
-      const btn = document.getElementById('btn');
-      const btnAgain = document.getElementById('btnAgain');
-
-      function reveal() {
-        poemBox.classList.add('is-show');
-        typeText(POEM, 16);
-        btnAgain.disabled = false;
-        startFX(40);
-      }
+      /* ======================
+         BUTTON LOGIC (ONCE)
+      ====================== */
+      const btn = document.getElementById('btn')
 
       btn.addEventListener('click', () => {
         if (!poemBox.classList.contains('is-show')) {
-          reveal();
-        } else {
-          startFX(80);
+          poemBox.classList.add('is-show')
+          typeText(POEM)
+
+          if (!fxPlayedOnce) {
+            fxPlayedOnce = true
+            spawnHearts()
+            animate()
+          }
         }
-      });
-
-      btnAgain.addEventListener('click', () => startFX(120));
-
-      // Keyboard shortcuts
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') stopFX();
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          if (!poemBox.classList.contains('is-show')) reveal();
-          else startFX(90);
-        }
-      });
-
-      // Reduced motion preference
-      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced) {
-        // minimize background hearts
-        bgHearts.style.opacity = '0.15';
-      }
+      })
     </script>
   </body>
 </html>
